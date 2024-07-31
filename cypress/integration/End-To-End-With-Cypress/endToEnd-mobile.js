@@ -17,6 +17,36 @@ describe('New Car', () => {
         //   cy.get('.agree > input').check();
         //   cy.get('.loginButton').click();
 
+        // cookies
+        // Custom function to check visibility and click
+        const clickIfVisible = (selector) => {
+            cy.get('body').then(($body) => {
+                // Check if the element exists in the DOM
+                if ($body.find(selector).length) {
+                    // Check if the element is visible
+                    cy.get(selector, { timeout: 0 }).then(($el) => {
+                        if ($el.is(':visible')) {
+                            // Click the element
+                            cy.wrap($el).click({ force: true }).then(() => {
+                                cy.log('Element clicked');
+                            }).catch((e) => {
+                                cy.log('Failed to click the element but continuing the test', e);
+                            });
+                        } else {
+                            cy.log('Element not visible');
+                        }
+                    }).catch((e) => {
+                        cy.log('Element not found in DOM', e);
+                    });
+                } else {
+                    cy.log('Element does not exist');
+                }
+            });
+        };
+
+        // Usage
+        clickIfVisible('.fc-cta-consent > .fc-button-label');
+
         // Need to generate a random email address and change this if you want to use this(the upper) functionality
 
         // Login
