@@ -6,6 +6,7 @@ describe('New Car', () => {
         cy.visit('https://www.mobile.bg/', {
             defaultCommandTimeout: 10000
         })
+        cy.wait(3000)
 
         //   // Navigate to Register page
         //   cy.get('[data-link="//www.mobile.bg/users/registration"]').click();
@@ -16,6 +17,8 @@ describe('New Car', () => {
         //   cy.get('[name="passc"]').type('password');
         //   cy.get('.agree > input').check();
         //   cy.get('.loginButton').click();
+
+        // Need to generate a random email address and change this if you want to use this(the upper) functionality
 
         // cookies
         // Custom function to check visibility and click
@@ -29,15 +32,11 @@ describe('New Car', () => {
                             // Click the element
                             cy.wrap($el).click({ force: true }).then(() => {
                                 cy.log('Element clicked');
-                            }).catch((e) => {
-                                cy.log('Failed to click the element but continuing the test', e);
-                            });
+                            })
                         } else {
                             cy.log('Element not visible');
                         }
-                    }).catch((e) => {
-                        cy.log('Element not found in DOM', e);
-                    });
+                    })
                 } else {
                     cy.log('Element does not exist');
                 }
@@ -46,8 +45,6 @@ describe('New Car', () => {
 
         // Usage
         clickIfVisible('.fc-cta-consent > .fc-button-label');
-
-        // Need to generate a random email address and change this if you want to use this(the upper) functionality
 
         // Login
         cy.get('[data-link="//www.mobile.bg/users/login"] > strong').click();
@@ -89,25 +86,3 @@ describe('New Car', () => {
 
     });
 })
-
-
-
-
-
-// Add 3 products to the cart in 3 different ways
-
-// Navigate to the cart and verify the products are there
-
-// Remove 1 product from the cart
-
-// Validate the total amount
-
-// Proceed to checkout
-
-// Fill in the billing details
-
-// Fill in the shipping details
-
-// Choose a payment method
-
-// Confirm the order <-- We are missing this step cause we are using a real website. 
